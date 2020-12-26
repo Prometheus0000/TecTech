@@ -1186,6 +1186,7 @@ public class DreamCraftRecipeLoader implements Runnable {
                             Materials.Concrete.getMolten(73728L)
                     },
                     getItemContainer("StargateFramePart").get(1L), 72000, 2000000);
+            
             //Deep Dark Portal
             TT_recipeAdder.addResearchableAssemblylineRecipe(GT_ModHandler.getModItem("dreamcraft", "item.HeavyDutyPlateTier8", 1, 0),
                     16777216, 2048, 2000000, 64, new Object[]{
@@ -1206,8 +1207,7 @@ public class DreamCraftRecipeLoader implements Runnable {
                     Materials.Cheese.getMolten(232000L),
             }, ItemList.Block_BedrockiumCompressed.get(1), 10000, 5000000);
 
-
-            //Batteries
+            //Ultimate and Really Ultimate Batteries
             TT_recipeAdder.addResearchableAssemblylineRecipe(ItemList.Energy_Cluster.get(1L), 12000, 16, 100000, 3, new Object[]{
                     GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Tritanium, 64L),
                     new Object[]{OrePrefixes.circuit.get(Materials.Infinite), 1L},
@@ -1244,6 +1244,41 @@ public class DreamCraftRecipeLoader implements Runnable {
                     Materials.Naquadria.getMolten(9216),
                     new FluidStack(FluidRegistry.getFluid("ic2coolant"), 32000)
             }, ItemList.ZPM3.get(1), 4000, 1600000);
+            
+            //BM Orbs
+            TT_recipeAdder.addResearchableAssemblylineRecipe(GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier7", 1, 0),
+                    235929600, 8192, 2000000, 4, new Object[]{
+                    GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier8", 1, 0),
+                    ItemList.Electric_Pump_UV.get(8),
+                    ItemList.Sensor_UV.get(8),
+                    ItemList.Emitter_UV.get(8),
+                    GT_ModHandler.getModItem("EnderStorage", "enderChest", 8, 4096),
+                    ItemList.Circuit_Wafer_QPIC.get(8L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Americium, 64L),                  
+                    GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 64),
+            }, new FluidStack[]{
+            		new FluidStack(FluidRegistry.getFluid("lifeessence"), 296000),
+            		Materials.UUMatter.getFluid(64000),
+            		Materials.Americium.getPlasma(9216L),
+                    Materials.Radon.getPlasma(9216L)
+            }, getItemContainer("TechnoOrb").get(1L), 72000, 2000000);
+            
+            TT_recipeAdder.addResearchableAssemblylineRecipe(GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier8", 1, 0),
+                    1887436800, 32768, 80000000, 8, new Object[]{
+                    GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier9", 1, 0),
+                    ItemList.Field_Generator_UHV.get(16),
+                    new Object[]{OrePrefixes.circuit.get(Materials.Nano), 1},
+                    GT_ModHandler.getModItem("berriespp", "Modifier", 1, 2),
+                    GT_OreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Infinity, 64L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Infinity, 64L),
+                    GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUHV, 64),
+            }, new FluidStack[]{
+            		new FluidStack(FluidRegistry.getFluid("lifeessence"), 368000),
+                    Materials.UUMatter.getFluid(368000),
+                    Materials.Milk.getFluid(368000),
+                    new FluidStack(FluidRegistry.getFluid("oganesson"), 16000)
+            }, getItemContainer("ArmokOrb").get(1L), 1728000, 8000000);
         }
         //endregion
 
