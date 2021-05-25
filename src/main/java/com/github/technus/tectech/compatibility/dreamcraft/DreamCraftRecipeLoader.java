@@ -1397,7 +1397,40 @@ public class DreamCraftRecipeLoader implements Runnable {
                 new FluidStack(FluidRegistry.getFluid("ic2coolant"), 32000)
         }, ItemList.ZPM3.get(1), 4000, 1600000);
         
-
+        //BM Orbs
+        TT_recipeAdder.addResearchableAssemblylineRecipe(GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier7", 1, 0),
+                235929600, 8192, 2000000, 4, new Object[]{
+                GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier8", 1, 0),
+                ItemList.Electric_Pump_UV.get(8),
+                ItemList.Sensor_UV.get(8),
+                ItemList.Emitter_UV.get(8),
+                GT_ModHandler.getModItem("EnderStorage", "enderChest", 8, 4096),
+                ItemList.Circuit_Wafer_QPIC.get(8L),
+                GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Americium, 64L),                  
+                GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUV, 64),
+        }, new FluidStack[]{
+            		new FluidStack(FluidRegistry.getFluid("lifeessence"), 296000),
+            		Materials.UUMatter.getFluid(64000),
+            		Materials.Americium.getPlasma(9216L),
+                Materials.Radon.getPlasma(9216L)
+        }, getItemContainer("TechnoOrb").get(1L), 72000, 2000000);
+            
+        TT_recipeAdder.addResearchableAssemblylineRecipe(GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier8", 1, 0),
+                1887436800, 32768, 80000000, 8, new Object[]{
+                GT_ModHandler.getModItem("dreamcraft", "item.RawOrbTier9", 1, 0),
+                ItemList.Field_Generator_UHV.get(16),
+                new Object[]{OrePrefixes.circuit.get(Materials.Nano), 1},
+                GT_ModHandler.getModItem("berriespp", "Modifier", 1, 2),
+                GT_OreDictUnificator.get(OrePrefixes.block, Materials.Infinity, 4L),
+                GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Infinity, 64L),
+                GT_OreDictUnificator.get(OrePrefixes.wireFine, Materials.Infinity, 64L),
+                GT_OreDictUnificator.get(OrePrefixes.wireGt01, Materials.SuperconductorUHV, 64),
+        }, new FluidStack[]{
+            		new FluidStack(FluidRegistry.getFluid("lifeessence"), 368000),
+                Materials.UUMatter.getFluid(368000),
+                Materials.Milk.getFluid(368000),
+                new FluidStack(FluidRegistry.getFluid("oganesson"), 16000)
+        }, getItemContainer("ArmokOrb").get(1L), 1728000, 8000000);
         
         //region singleblocks
 
