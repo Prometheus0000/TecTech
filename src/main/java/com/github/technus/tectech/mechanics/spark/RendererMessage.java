@@ -3,6 +3,8 @@ package com.github.technus.tectech.mechanics.spark;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import eu.usrv.yamcore.network.client.AbstractClientMessageHandler;
 import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
@@ -14,9 +16,11 @@ import thaumcraft.client.fx.bolt.FXLightningBolt;
 import java.io.*;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.Random;
 
+//TODO Re-work how sparks are distributed
 public class RendererMessage implements IMessage {
-    HashSet<ThaumSpark> sparkList = new HashSet<ThaumSpark>();
+    HashSet<ThaumSpark> sparkList;
 
     public RendererMessage() {
     }
@@ -31,7 +35,7 @@ public class RendererMessage implements IMessage {
             ObjectInputStream ois = new ObjectInputStream(is);
             Object data = ois.readObject();
             sparkList = (HashSet<ThaumSpark>) data;
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ignored) {
         }
     }
 
@@ -44,7 +48,7 @@ public class RendererMessage implements IMessage {
             oos.flush();
             InputStream is = new ByteArrayInputStream(baos.toByteArray());
             pBuffer.writeBytes(is, baos.toByteArray().length);
-        } catch (IOException ex) {
+        } catch (IOException ignore) {
         }
     }
 
@@ -61,14 +65,27 @@ public class RendererMessage implements IMessage {
     public static class ClientHandler extends AbstractClientMessageHandler<RendererData> {
         @Override
         public IMessage handleClientMessage(EntityPlayer pPlayer, RendererData pMessage, MessageContext pCtx) {
+            //disgusting
+            Random localRand = Minecraft.getMinecraft().theWorld.rand;
+            int[] zapsToUse = new int[4];
+            for (int i = 0; i < 3; i++) {
+                zapsToUse[i] = localRand.nextInt(pMessage.sparkList.size());
+            }
+            int i = 0;
             for (ThaumSpark sp : pMessage.sparkList) {
-                thaumLightning(sp.x, sp.y, sp.z, sp.xR, sp.yR, sp.zR, sp.wID);
+                for (int j : zapsToUse) {
+                    if(i == j){
+                        thaumLightning(sp.x, sp.y, sp.z, sp.xR, sp.yR, sp.zR, sp.wID);
+                    }
+                }
+                i++;
             }
             pMessage.sparkList.clear();
             return null;
         }
     }
 
+    @SideOnly(Side.CLIENT)
     private static void thaumLightning(int tX, int tY, int tZ, int tXN, int tYN, int tZN, int wID) {
         //This is enough to check for thaum, since it only ever matters for client side effects (Tested not to crash)
         if (Loader.isModLoaded("Thaumcraft")) {
